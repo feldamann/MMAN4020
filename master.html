@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="msapplication-TileColor" content="#2196f3">
+    <meta name="msapplication-config" content="browserconfig.xml">
+    <meta name="theme-color" content="#2196f3">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="msapplication-starturl" content="./">
+    <meta name="description"
+          content="Progressive Web Application for serial communication with your own Bluetooth Low Energy (Smart) devices">
+
+    <title>Web Bluetooth Terminal</title>
+
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="icons/favicon-16x16.png">
+    <link rel="mask-icon" href="icons/safari-pinned-tab.svg" color="#2196f3">
+    <link rel="shortcut icon" href="icons/favicon.ico">
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto+Mono" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="css/normalize.css" rel="stylesheet">
+    <link href="css/styles.css" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+    <style type="text/css">
+    hr {height:2px;}
+    #map {
+    height: 50%;
+    }
+    </style>
+
+
+
+</head>
+<body>
+
+    <div id="Bluetooth" class="app">
+
+        <div class="toolbar">
+            <button class="w3-bar-item w3-button" onclick="openCity('Camera')">Camera</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Bluetooth')">Bluetooth</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Location')">Location</button>
+        </div>
+
+        <hr>
+
+        <div class="toolbar">
+
+            <div id="device-name" class="name">Terminal</div>
+
+            <div class="buttons">
+
+                <button id="pumpforward" type="button" aria-label="pumpforward">
+                    <i class="material-icons">skip_next</i>
+                </button>
+                
+                <button id="pumpoff" type="button" aria-label="pumpoff">
+                    <i class="material-icons">pause</i>
+                </button>
+
+                <button id="pumpreverse" type="button" aria-label="pumpreverse">
+                    <i class="material-icons">skip_previous</i>
+                </button>
+
+                <button id="sol1" type="button" aria-label="sol1">
+                    <i class="material-icons">filter_1</i>
+                </button>
+
+                <button id="sol2" type="button" aria-label="sol2">
+                    <i class="material-icons">filter_2</i>
+                </button>
+
+                <button id="sol3" type="button" aria-label="sol3">
+                    <i class="material-icons">filter_3</i>
+                </button>
+
+                <div>
+
+                </div>
+
+                <button id="sol4" type="button" aria-label="sol4">
+                    <i class="material-icons">filter_4</i>
+                </button>
+
+                <button id="sol5" type="button" aria-label="sol5">
+                    <i class="material-icons">filter_5</i>
+                </button>
+
+                <button id="sol6" type="button" aria-label="sol6">
+                    <i class="material-icons">filter_6</i>
+                </button>
+
+                <button id="sol7" type="button" aria-label="sol7">
+                    <i class="material-icons">filter_7</i>
+                </button>
+
+                <button id="sol8" type="button" aria-label="sol8">
+                    <i class="material-icons">filter_8</i>
+                </button>
+
+                <button id="sol9" type="button" aria-label="sol9">
+                    <i class="material-icons">filter_9</i>
+                </button>
+
+            </div>
+
+        </div>
+
+        <div id="terminal" class="terminal"></div>
+
+        <form id="send-form" class="send-form">
+
+            <input id="input" type="text" aria-label="Input" autocomplete="off" placeholder="Type message to drone client">
+
+            <button type="submit" aria-label="Send">
+                <i class="material-icons">send</i>
+            </button>
+
+        </form>
+    </div>
+
+    <div id="Camera" class="app" style="display:none">
+
+        <div class="toolbar">
+            <button class="w3-bar-item w3-button" onclick="openCity('Camera')">Camera</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Bluetooth')">Bluetooth</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Location')">Location</button>
+        </div>
+
+            <h2>Video Stream</h2>
+            <hr>
+
+            <canvas class="hidden" id="myCanvas"></canvas>
+
+            <div>
+                <button id="startVideo" type="button" aria-label="Start">
+                    <i class="material-icons">visibility</i>
+                </button>
+                <button id="stopVideo" type="button" aria-label="Stop">
+                    <i class="material-icons">visibility_off</i>
+                </button>
+            </div>
+            <p>Note: Client 2 must be active and have camera enabled to view stream properly.<p>
+            
+    </div>
+
+      
+    <div id="Location" class="app" style="display:none">
+
+        <div class="toolbar">
+            <button class="w3-bar-item w3-button" onclick="openCity('Camera')">Camera</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Bluetooth')">Bluetooth</button>
+            <button class="w3-bar-item w3-button" onclick="openCity('Location')">Location</button>
+        </div>
+
+        <h2>GeoLocation</h2>
+        
+
+        <button id="locate" type="button" aria-label="locate">
+            <i class="material-icons">location_on</i>
+        </button>
+
+        <p id="lat"> </p>
+
+        <!--<a href="maps.html">Click here to view a map of latest location!</a>-->
+
+
+    </div>
+
+    <script>
+        function openCity(cityName) {
+          var i;
+          var x = document.getElementsByClassName("app");
+          for (i = 0; i < x.length; i++) {
+            x[i].style.display = "none";  
+          }
+          if (cityName == "Bluetooth") {
+            document.getElementById(cityName).style.display = "flex";  
+          }
+          else {
+            document.getElementById(cityName).style.display = "initial";  
+          }
+        }
+    </script>
+
+    
+    <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+    <script src="js/BTCONE - 1.js"></script>
+    <script src="js/mainmaster.js"></script>
+    <script src="js/companion.js" data-service-worker="sw.js"></script>
+    <script type="text/javascript" src="js/draw11.js"></script>
+
+
+
+</body>
+</html>
